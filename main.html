@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>대한민국 향토 음식 지도</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        /*공통*/
+
+        body {
+            font-family: 'Pretendard', sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            color: #f9f9f9;
+        }
+
+        /*아예맨위*/
+        header {
+            background-color: #fff;
+            height: 200px;
+            /* 헤더 높이 설정 */
+            display: flex;
+            /* Flexbox 사용 */
+            align-items: center;
+            /* 수직 가운데 정렬 */
+            justify-content: center;
+            /* 수평 가운데 정렬 */
+            border-bottom: 1px solid #ddd;
+            font-size: 18px;
+            /* 텍스트 크기 */
+            color: #333;
+            /* 텍스트 색상 */
+            font-weight: lighter;
+        }
+
+        /*소개섹션*/
+        .hero {
+            text-align: center;
+            background-color: #ccc;
+            color: #f9f9f9;
+            padding: 80px 20px;
+            position: relative;
+        }
+
+        .hero p {
+            font-size: 17px;
+            margin: 0;
+        }
+
+        .hero .line {
+            width: 50px;
+            height: 2px;
+            background-color: #f9f9f9;
+            margin: 330px auto 0;
+        }
+
+
+        /* 모달 배경 스타일 */
+        .modal-bg {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        /* 모달 창 스타일 */
+        .modal-content {
+            text-align: center;
+            color: black;
+            line-height: 0.2em;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 80%;
+        }
+
+        .modal-content p{
+            line-height: 1.5rem;
+        }
+
+        /* 닫기 버튼 스타일 */
+        .close-btn {
+            float: right;
+            font-size: 20px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h2>대한민국 향토 음식 지도</h2>
+    </header>
+    <!-- 타이틀 -->
+    <section class="hero">
+        <p>
+            <span style="font-size:26px; font-weight: bold;">향토음식</span>이란,<br>
+            지방의 특산품이나 특유의 조리법 등을 이용하여 만든<br>그 지역의 전통 음식입니다.<br><br>
+            지금까지 비슷한 음식만 드셔보시진 않으셨나요?<br>
+            사실 대한민국 방방곡곡 지역만의 음식이 있답니다.<br>
+            이 지도와 함께, 미식 여정을 떠나보세요!
+        </p>
+        <div class="line"></div>
+    </section>
+
+  
+    <!--마커 세팅-->
+    <section id="map" class="map-section">
+        <p style="text-align: center;">
+            클릭시 해당 지역의 음식을 볼 수 있습니다.
+        </p>
+        <img src="IMG_OTHER\marker.png" alt="마커 이미지" class="marker" id="marker11" width="50px">
+        <img src="IMG_OTHER\marker.png" alt="마커 이미지" class="marker" id="marker21" width="50px">
+        <img src="IMG_OTHER\marker.png" alt="마커 이미지" class="marker" id="marker31" width="50px">
+        <img src="IMG_OTHER\marker.png" alt="마커 이미지" class="marker" id="marker41" width="50px">
+        <img src="IMG_OTHER\marker.png" alt="마커 이미지" class="marker" id="marker51" width="50px">
+        <img src="IMG_OTHER\marker.png" alt="마커 이미지" class="marker" id="marker61" width="50px">
+        <img src="IMG_OTHER\marker.png" alt="마커 이미지" class="marker" id="marker71" width="50px">
+        <img src="IMG_OTHER\marker.png" alt="마커 이미지" class="marker" id="marker81" width="50px">
+        <img src="IMG_OTHER\marker.png" alt="마커 이미지" class="marker" id="marker91" width="50px">
+        <img src="IMG_OTHER\marker.png" alt="마커 이미지" class="marker" id="marker101" width="50px">
+        <img src="IMG_OTHER\marker.png" alt="마커 이미지" class="marker" id="marker111" width="50px">
+        <img src="IMG_OTHER\marker.png" alt="마커 이미지" class="marker" id="marker121" width="50px">
+        <img src="IMG_OTHER\marker.png" alt="마커 이미지" class="marker" id="marker131" width="50px">
+        <img src="IMG_OTHER\marker.png" alt="마커 이미지" class="marker" id="marker141" width="50px">
+        <img src="IMG_OTHER\marker.png" alt="마커 이미지" class="marker" id="marker151" width="50px">
+    </section>
+
+    <!-- 마커11 : 서울 구절판 -->
+    <div class="modal-bg" id="modal-bg11">
+        <div class="modal-content">
+            <span class="close-btn" id="close-btn11">&times;</span>
+            <h4>서울</h4>
+            <h2>구절판</h2>
+            <img src="IMG_FOOD\foodimg11.jpg" width="400px" style="padding-top:1rem; padding-bottom:1rem;">
+            <p>아홉 칸으로 나뉜 목기에 채소와 고기류 등<br>
+                여덟 가지 음식을 둘레에 담고 <br>가운데에 담은 밀전병에 싸면서 먹는 음식이다.
+            </p>
+            </br>
+            <p><a href="fooddetails11.html">더 알아보기</a></p>
+        </div>
+    </div>
+
+    <!-- 마커21 : 인천 밴댕이회 -->
+    <div class="modal-bg" id="modal-bg21">
+        <div class="modal-content">
+            <span class="close-btn" id="close-btn21">&times;</span>
+            <h4>인천</h4>
+            <h2>밴댕이회</h2>
+            <img src="IMG_FOOD\foodimg21.jpg" width="400px" style="padding-top:1rem; padding-bottom:1rem;">
+            <p>밴댕이를 씻어 손질한 후 깻잎에 싸서 마늘을 넣고 <br> 된장이나 초고추장을 곁들인 것이다.</p>
+            </br>
+            <p><a href="fooddetails21.html">더 알아보기</a></p>
+        </div>
+    </div>
+
+    <!-- 마커31 : 경기 백암순대 -->
+    <div class="modal-bg" id="modal-bg31">
+        <div class="modal-content">
+            <span class="close-btn" id="close-btn31">&times;</span>
+            <h4>경기</h4>
+            <h2>백암순대</h2>
+            <img src="IMG_FOOD\foodimg31.jpg" width="400px" style="padding-top:1rem; padding-bottom:1rem;">
+            <p>잘 손질된 각종 재료를 선지에 양념을 넣어 버무린 순대소를,<br>손질하여 한쪽 끝을 묶은 돼지창자에 채워 넣고<br>끝을 실로 묶은 다음 된장과 간장을 푼<br>돼지육수에 넣고 삶아낸 것이다.</p>
+            </br>
+            <p><a href="fooddetails31.html">더 알아보기</a></p>
+        </div>
+    </div>
+
+    <!-- 마커41 : 강원 올챙이국수 -->
+    <div class="modal-bg" id="modal-bg41">
+        <div class="modal-content">
+            <span class="close-btn" id="close-btn41">&times;</span>
+            <h4>강원</h4>
+            <h2>올챙이국수</h2>
+            <img src="IMG_FOOD\foodimg41.jpg" width="400px" style="padding-top:1rem; padding-bottom:1rem;">
+            <p>옥수수전분으로 죽을 쑤어 바가지 구멍을 통해<br>찬물이 담긴 자배기에 밀어 내리면 똑똑 떨어져서 묵이 되는데<br>그 굳은 형태가 마치 올챙이와 비슷하다고 해서 붙여진 이름이다.</p>
+            </br>
+            <p><a href="fooddetails41.html">더 알아보기</a></p>
+        </div>
+    </div>
+
+    <!-- 마커51 : 충북 옥천 생선국수 -->
+    <div class="modal-bg" id="modal-bg51">
+        <div class="modal-content">
+            <span class="close-btn" id="close-btn51">&times;</span>
+            <h4>충북</h4>
+            <h2>옥천 생선국수</h2>
+            <img src="IMG_FOOD\foodimg51.jpg" width="400px" style="padding-top:1rem; padding-bottom:1rem;">
+            <p>여러 종류의 민물고기를 삶은 국물에 국수를 말아 먹는 음식으로<br>얼큰하고 시원한 맛이 특징이다.</p>
+            </br>
+            <p><a href="fooddetails51.html">더 알아보기</a></p>
+        </div>
+    </div>
+
+    <!-- 마커61 : 충남 게국지 -->
+    <div class="modal-bg" id="modal-bg61">
+        <div class="modal-content">
+            <span class="close-btn" id="close-btn61">&times;</span>
+            <h4>충남</h4>
+            <h2>당진 게국지</h2>
+            <img src="IMG_FOOD\foodimg61.jpg" width="400px" style="padding-top:1rem; padding-bottom:1rem;">
+            <p>게를 손질하여 겉절이 김치와 함께 끓여 내는 향토 음식</p>
+            </br>
+            <p><a href="fooddetails61.html">더 알아보기</a></p>
+        </div>
+    </div>
+
+    <!-- 마커71 : 경북 영천 소머리국밥-->
+    <div class="modal-bg" id="modal-bg71">
+        <div class="modal-content">
+            <span class="close-btn" id="close-btn71">&times;</span>
+            <h4>경북</h4>
+            <h2>영천 소머리국밥</h2>
+            <img src="IMG_FOOD\foodimg71.jpg" width="400px" style="padding-top:1rem; padding-bottom:1rem;">
+            <p>영천시 공설시장 내에서 소머리뼈와 사골을 이용해서 만드는 향토음식</p>
+            </br>
+            <p><a href="fooddetails71.html">더 알아보기</a></p>
+        </div>
+    </div>
+
+    <!-- 마커81 :경남 남해 생멸치찌개 -->
+    <div class="modal-bg" id="modal-bg81">
+        <div class="modal-content">
+            <span class="close-btn" id="close-btn81">&times;</span>
+            <h4>경남</h4>
+            <h2>남해 생멸치찌개</h2>
+            <img src="IMG_FOOD\foodimg81.jpg" width="400px" style="padding-top:1rem; padding-bottom:1rem;">
+            <p>물을 끓인 다음 생멸치와 무, 양념장을 넣어 끓인 후 <br>양파, 풋고추, 붉은 고추를 넣고 더 끓인 찌개이다.</p>
+            </br>
+            <p><a href="fooddetails81.html">더 알아보기</a></p>
+        </div>
+    </div>
+
+    <!-- 마커91 :대구 뭉티기 -->
+    <div class="modal-bg" id="modal-bg91">
+        <div class="modal-content">
+            <span class="close-btn" id="close-btn91">&times;</span>
+            <h4>대구</h4>
+            <h2>뭉티기</h2>
+            <img src="IMG_FOOD\foodimg91.jpg" width="400px" style="padding-top:1rem; padding-bottom:1rem;">
+            <p>소고기 처지개살과 우둔살을 두껍게 썰어 낸 소 생고기</p>
+            </br>
+            <p><a href="fooddetails91.html">더 알아보기</a></p>
+        </div>
+    </div>
+
+    <!-- 마커101 :울산 굽은떡국 -->
+    <div class="modal-bg" id="modal-bg101">
+        <div class="modal-content">
+            <span class="close-btn" id="close-btn101">&times;</span>
+            <h4>울산</h4>
+            <h2>굽은떡국</h2>
+            <img src="IMG_FOOD\foodimg101.jpg" width="400px" style="padding-top:1rem; padding-bottom:1rem;">
+            <p>멸치장국국물이 끓으면 식용유에 지진 찹쌀 반대기를 넣고<br> 불을 바로 끈 다음 국간장, 참기름으로 간을 하고,<br> 양념하여 볶은 쇠고기, 지단, 김을 올린 것이다.</p>
+            </br>
+            <p><a href="fooddetails101.html">더 알아보기</a></p>
+        </div>
+    </div>
+
+    <!-- 마커111 :부산  밀면 -->
+    <div class="modal-bg" id="modal-bg111">
+        <div class="modal-content">
+            <span class="close-btn" id="close-btn111">&times;</span>
+            <h4>부산</h4>
+            <h2>밀면</h2>
+            <img src="IMG_FOOD\foodimg111.jpg" width="400px" style="padding-top:1rem; padding-bottom:1rem;">
+            <p>밀가루에 전분을 섞어 만든 밀면을 삶아 건진 국수에 육수를 붓고, <br>각종 양념과 고명을 곁들이는 음식이다.</p>
+            </br>
+            <p><a href="fooddetails111.html">더 알아보기</a></p>
+        </div>
+    </div>
+
+    <!-- 마커121 : 전북 (고창) 바지락죽 -->
+    <div class="modal-bg" id="modal-bg121">
+        <div class="modal-content">
+            <span class="close-btn" id="close-btn121">&times;</span>
+            <h4>전북</h4>
+            <h2>바지락죽</h2>
+            <img src="IMG_FOOD\foodimg121.jpg" width="400px" style="padding-top:1rem; padding-bottom:1rem;">
+            <p>다진 바지락살을 참기름으로 볶다가 불린 쌀을 넣고 조금 더 볶은 뒤 <br> 쌀뜨물을 붓고 쌀알이 푹 퍼지면 애호박을 넣고 끓여 간을 해먹는 음식이다.</p>
+            </br>
+            <p><a href="fooddetails121.html">더 알아보기</a></p>
+        </div>
+    </div>
+
+    <!-- 마커131 :  전남 무안 낙지호롱구이-->
+    <div class="modal-bg" id="modal-bg131">
+        <div class="modal-content">
+            <span class="close-btn" id="close-btn131">&times;</span>
+            <h4>전남</h4>
+            <h2>무안 낙지호롱구이</h2>
+            <img src="IMG_FOOD\foodimg131.jpg" width="400px" style="padding-top:1rem; padding-bottom:1rem;">
+            <p>낙지를 통째로 대나무 젓가락이나 짚묶음에 끼워 돌돌 감은 다음 <br>양념을 골고루 바르고 구워낸 것이다.
+            </p>
+            </br>
+            <p><a href="fooddetails131.html">더 알아보기</a></p>
+        </div>
+    </div>
+
+    <!-- 마커141 :광주 용봉탕 -->
+    <div class="modal-bg" id="modal-bg141">
+        <div class="modal-content">
+            <span class="close-btn" id="close-btn141">&times;</span>
+            <h4>광주</h4>
+            <h2>용봉탕</h2>
+            <img src="IMG_FOOD\foodimg141.jpg" width="400px" style="padding-top:1rem; padding-bottom:1rem;">
+            <p>광주광역시에서 자라와 닭을 재료로 하여 만드는 보양식이다.</p>
+            </br>
+            <p><a href="fooddetails141.html">더 알아보기</a></p>
+        </div>
+    </div>
+
+    <!-- 마커151 : 제주 깅이죽 -->
+    <div class="modal-bg" id="modal-bg151">
+        <div class="modal-content">
+            <span class="close-btn" id="close-btn151">&times;</span>
+            <h4>제주</h4>
+            <h2>깅이죽</h2>
+            <img src="IMG_FOOD\foodimg151.jpg" width="400px" style="padding-top:1rem; padding-bottom:1rem;">
+            <p>게죽의 제주도 방언으로, 작은 바닷게를 갈은 국물로 끓인 죽이다.<br>예로부터 관절통에 효능이 있다고 알려져 해녀들이 애용하는 별미 음식이다.</p>
+            </br>
+            <p><a href="fooddetails151.html">더 알아보기</a></p>
+        </div>
+    </div>
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // 마커와 모달 매핑
+            const markers = [
+                { markerId: "marker11", modalBgId: "modal-bg11", closeBtnId: "close-btn11" },
+                { markerId: "marker21", modalBgId: "modal-bg21", closeBtnId: "close-btn21" },
+                { markerId: "marker31", modalBgId: "modal-bg31", closeBtnId: "close-btn31" },
+                { markerId: "marker41", modalBgId: "modal-bg41", closeBtnId: "close-btn41" },
+                { markerId: "marker51", modalBgId: "modal-bg51", closeBtnId: "close-btn51" },
+                { markerId: "marker61", modalBgId: "modal-bg61", closeBtnId: "close-btn61" },
+                { markerId: "marker71", modalBgId: "modal-bg71", closeBtnId: "close-btn71" },
+                { markerId: "marker81", modalBgId: "modal-bg81", closeBtnId: "close-btn81" },
+                { markerId: "marker91", modalBgId: "modal-bg91", closeBtnId: "close-btn91" },
+                { markerId: "marker101", modalBgId: "modal-bg101", closeBtnId: "close-btn101" },
+                { markerId: "marker111", modalBgId: "modal-bg111", closeBtnId: "close-btn111" },
+                { markerId: "marker121", modalBgId: "modal-bg121", closeBtnId: "close-btn121" },
+                { markerId: "marker131", modalBgId: "modal-bg131", closeBtnId: "close-btn131" },
+                { markerId: "marker141", modalBgId: "modal-bg141", closeBtnId: "close-btn141" },
+                { markerId: "marker151", modalBgId: "modal-bg151", closeBtnId: "close-btn151" }
+            ];
+
+            //동작
+            markers.forEach(({ markerId, modalBgId, closeBtnId }) => {
+                const marker = document.getElementById(markerId);
+                const modalBg = document.getElementById(modalBgId);
+                const closeBtn = document.getElementById(closeBtnId);
+
+                // 마커 클릭 시 모달 창 열기
+                marker.addEventListener("click", function () {
+                    modalBg.style.display = "flex";
+                });
+
+                // 닫기 버튼 클릭 시 모달 창 닫기
+                closeBtn.addEventListener("click", function () {
+                    modalBg.style.display = "none";
+                });
+
+                // 모달 배경 클릭 시 모달 창 닫기
+                modalBg.addEventListener("click", function (e) {
+                    if (e.target === modalBg) {
+                        modalBg.style.display = "none";
+                    }
+                });
+            });
+        });
+    </script>
+
+
+</body>
+
+</html>

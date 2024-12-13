@@ -1,0 +1,164 @@
+/*소개말*/
+.hero {
+    background-image:  linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://english.visitkorea.or.kr/public/images/foodtrip/k-food-img/theme/11/img_contents2_7.jpg'); /* 배경 이미지 파일 경로 */
+    background-size: cover;  /* 이미지가 섹션 크기에 맞게 확대/축소 */
+    background-position: center; /* 이미지 중앙 정렬 */
+    background-repeat: no-repeat; /* 이미지 반복 방지 */
+    height: 400px;
+
+
+}
+
+.hero p {
+    position: absolute; /* 절대 위치 */
+    top: 50%; /* 부모 높이의 50% */
+    left: 50%; /* 부모 너비의 50% */
+    transform: translate(-50%, -50%); /* 중앙으로 이동 */
+    margin: 0;
+    text-align: center;
+    line-height: 1.7;
+  }
+
+
+
+/* 지도 섹션 */
+.map-section {
+    margin-bottom: 50px;
+    padding: 50px 20px 50px 50px;
+    text-align: center;
+    background: #e6e6e6;
+    background-image: url('koreamap.png');
+    height: 1130px;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.map-section p{
+    color:#333;
+    text-align:left;
+    margin-left:-10px;
+    margin-top:-30px;
+}
+
+
+#map {
+    position: relative;
+}
+
+
+
+/*마커 11 : 서울- 구절판*/
+#marker11 {
+    position: relative;
+    top: 198px;
+    left: 254px;
+}
+
+/*마커 21 : 인천*/
+#marker21 {
+    position: relative;
+    top: 210px;
+    left: 155px;
+}
+
+/*마커 31 : 경기*/
+#marker31 {
+    position: relative;
+    top: 265px;
+    left: 217px;
+}
+
+
+/*마커 41 : 강원*/
+#marker41 {
+    position: relative;
+    top: 140px;
+    left: 260px;
+}
+
+
+/*마커 51 : 충북*/
+#marker51 {
+    position: relative;
+    top: 440px;
+    left: 135px;
+}
+
+
+/*마커 61 : 충남*/
+#marker61 {
+    position: relative;
+    top: 330px;
+    left: -60px;
+}
+
+
+/*마커 71 : 경북*/
+#marker71 {
+    position: relative;
+    top: 500px;
+    left: 230px;
+}
+
+
+/*마커 81 : 경남*/
+#marker81 {
+    position: relative;
+    top: 730px;
+    left: 13px;
+}
+
+/*마커 91 : 대구*/
+#marker91 {
+    position: relative;
+    top: 550px;
+    left: 60px;
+}
+
+
+/*마커 101 : 울산*/
+#marker101 {
+    position: relative;
+    top: 590px;
+    left: 120px;
+}
+
+
+/*마커 111 : 부산*/
+#marker111 {
+    position: relative;
+    top: 660px;
+    left: 35px;
+}
+
+
+/*마커 121: 전북*/
+#marker121 {
+    position: relative;
+    top: 600px;
+    left: -410px;
+}
+
+
+/*마커 131 : 전남 무안*/
+#marker131 {
+    position: relative;
+    top: 660px;
+    left: -470px;
+}
+
+
+/*마커 141 : 광주*/
+#marker141 {
+    position: relative;
+    top: 600px;
+    left: -380px;
+}
+
+
+/*마커 151 : 제주*/
+#marker151 {
+    position: relative;
+    top: 1000px;
+    left: -580px;
+}
